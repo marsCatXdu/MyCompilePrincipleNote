@@ -110,6 +110,15 @@ F  → (E) | id | num<br>
 5. 对于产生式 `E → TE'`，与上面的 3 同理，可得 **FIRST(E) = FIRST(T) = FIRST(F) = { (, id, num }**
 6. 对于产生式 `L → E;L|ε`，要结合上面的 3 和 2 一起理解。首先该产生式可以经过多步推导后得到终结符，这个和 3 同理。然后，该产生式本身也能推出 ε，这与 2 同理。最终可得：**FIRST(T) = { ε, (, id, num }**
 
+即，最终可得：
+
+```
+FIRST(F/T/E) = { (  id  num }
+FIRST(T’) = { *  /  mod  ε }
+FIRST(E’) = { + -  ε }
+FIRST(L)  = { ε  (  id  num }
+```
+
 
 
 #### FOLLOW 集合
@@ -139,5 +148,12 @@ F  → (E) | id | num<br>
 6. 第六个产生式 `F → (E)|id|num` ，这一步求 FOLLOW(F)。
    由产生式 `T' → *FT'|/FT'|mod FT'|ε` 可知，FIRST(T') 应被加入 FOLLOW(F)。而 T' 可穿透，故 FOLLOW(T') 也应被加入 FOLLOW(F)。因此，**FOLLOW(F) = { *, /, mod, +, -, ;, ) }**
 
+即，最终可得：
 
+```
+FOLLOW(L) = { # }
+FOLLOW(E/E’) = { )  ; }
+FOLLOW(T/T’) = { + - ; ) }
+FOLLOW(F) = { + -  *  /  mod  )  ; }
+```
 
